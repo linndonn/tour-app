@@ -1,4 +1,4 @@
-gallery.jsx
+
 
 import React, { useState, useEffect } from 'react';
 import TourCard from "./TourCard";
