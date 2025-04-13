@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import React, {useState} from 'react';
+import Gallery from './components/Gallery';
+import './styles/styles.css';
+// Root component of the application
 function App() {
-  const [count, setCount] = useState(0)
+    const [tours, setTours] = useState([]);
+  
+  // Function to remove a tour or all if ID is null
+  const removeTour = (id) => {
+    
+    if (id === null) {
+      setTours([]); 
+    } else {
+      // Remove the tour that matches the given ID
+      setTours((prevTours) => prevTours.filter((tour) => tour.id !== id));
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      <h1>An Antiguan Tour of Europe (Tour App Project) </h1>
+      <h2>Tour with us! Options listed below.</h2>
+      <Gallery tours={tours} setTours={setTours} onRemove={removeTour} />
+      <button onClick={() => setTours([])}>Fetch Tours</button>
+
+    </main>
+)
 }
 
-export default App
+export default App;
